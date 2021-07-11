@@ -1,0 +1,182 @@
+<!doctype html>
+
+<head>
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Visuals: Mini Project</title>
+        <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.js"></script> -->
+        <script type="text/javascript" src="webcamjs/webcam.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        
+    <style>
+        #my_camera{
+        width: 320px;
+        height: 240px;
+        border: 1px solid black;
+        }
+
+    /* CSS comes here
+    #video {
+        border: 1px solid black;
+        width: 320px;
+        height: 240px;
+    }
+
+    #photo {
+        border: 1px solid black;
+        width: 320px;
+        height: 240px;
+    }
+
+    #canvas {
+        display: none;
+    }
+
+    .camera {
+        width: 340px;
+        display: inline-block;
+    }
+
+    .output {
+        width: 340px;
+        display: inline-block;
+    }
+
+    #startbutton {
+        display: block;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        bottom: 36px;
+        padding: 5px;
+        background-color: #6a67ce;
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        font-size: 14px;
+        color: rgba(255, 255, 255, 1.0);
+        cursor: pointer;
+    }
+
+    .contentarea {
+        font-size: 16px;
+        font-family: Arial;
+        text-align: center;
+    } */
+
+    </style>
+
+</head>
+
+<body>
+
+    <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top" style="background-color: #9ED270; padding-bottom: 10px; box-shadow: 10px 10px 8px grey;">
+          <div class="container" style="height: 50px;">
+            <a class="navbar-brand mr-4" href="/">Company Name</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+              <div class="navbar-nav mr-auto">
+                <!-- <a class="nav-item nav-link" href="{% url 'mini-home' %}">Home</a>
+                <a class="nav-item nav-link" href="/about">About</a> -->
+              </div>
+              <!-- Navbar Right Side -->
+              <div class="navbar-nav">
+                <a class="nav-item nav-link" href="{% url 'mini-home' %} ">Home</a>
+                <a class="nav-item nav-link" href="{% url 'mini-about' %}">About</a>
+                <a class="nav-item nav-link" href="{% url 'mini-help' %}">Help</a>
+                <a class="nav-item nav-link" href="#"> ? </a>
+              </div>
+            </div>
+          </div>
+        </nav>
+    </header>
+    <!-- Actually code -->
+    <!-- <div id="camera" style="height:auto;width:auto; text-align:left;"></div>
+    <input type="button" value="Take a Snap and Download Picture" id="btPic" 
+        onclick="takeSnapShot()" /> -->
+
+
+
+    <!-- <div class="contentarea" style="margin-top: 100px;">
+        <h1>
+            Capture the Photo
+        </h1>
+        <div class="camera">
+            <video id="video">Video stream not available.</video>
+        </div>
+        <div><button id="startbutton">Take photo</button></div>
+        <canvas id="canvas"></canvas>
+        <div class="output">
+            <img id="photo" alt="The screen capture will appear in this box.">
+            <div><button id = "">Save the photo</button></div>
+        </div>
+    </div> -->
+
+    <div id="my_camera"></div>
+    <input type=button value="Take Snapshot" onClick="take_snapshot()">
+    <div id="results" ></div>
+ 
+
+</body>
+
+<!-- <script>
+    // CAMERA SETTINGS.
+    Webcam.set({
+        width: 220,
+        height: 190,
+        image_format: 'jpeg',
+        jpeg_quality: 100
+    });
+    Webcam.attach('#camera');
+
+    // TAKE A SNAPSHOT.
+    takeSnapShot = function () {
+        Webcam.snap(function (data_uri) {
+            downloadImage('arun', data_uri);
+        });
+    }
+
+    // DOWNLOAD THE IMAGE.
+    downloadImage = function (name, datauri) {
+        var a = document.createElement('a');
+        a.setAttribute('download', name + '.png');
+        a.setAttribute('href', datauri);
+        a.click();
+    }
+</script> -->
+
+<!-- Script -->
+<script type="text/javascript" src="webcamjs/webcam.min.js"></script>
+
+<!-- Code to handle taking the snapshot and displaying it locally -->
+<script language="JavaScript">
+
+ // Configure a few settings and attach camera
+ Webcam.set({
+  width: 320,
+  height: 240,
+  image_format: 'jpeg',
+  jpeg_quality: 90
+ });
+ Webcam.attach( '#my_camera' );
+
+ // preload shutter audio clip
+ var shutter = new Audio();
+ shutter.autoplay = true;
+ shutter.src = navigator.userAgent.match(/Firefox/) ? 'shutter.ogg' : 'shutter.mp3';
+
+function take_snapshot() {
+ // play sound effect
+ shutter.play();
+
+ // take snapshot and get image data
+ Webcam.snap( function(data_uri) {
+ // display results in page
+ document.getElementById('results').innerHTML = 
+  '<img src="'+data_uri+'"/>';
+ } );
+}
+</script>
+
+</html>
